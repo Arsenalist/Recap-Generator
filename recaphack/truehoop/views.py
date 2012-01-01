@@ -83,10 +83,8 @@ def markup(request):
     html = template.render(Context({"starters": starters, "bench": bench, 'game_id': game_id, 'abbrs': abbrs, 'names': names, 'score': score, 'things': things}))
     
     # create css
-    f = open('static/css/quickreaction.css', 'r')
-    css = ""
-    for line in f:
-        css = css + line
+    f = urllib2.urlopen('http://saltcityhoops.com/thn-recaps/thn-styles.css')
+    css = f.read()
 
     # css and html combined into one payload to be returned to browser
     template = loader.get_template('markup.html')
