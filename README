@@ -1,0 +1,4 @@
+This is build on Django 1.3 and Python 2.7.
+
+It is tested on two Linux distros: Red Hat and Ubuntu.
+
