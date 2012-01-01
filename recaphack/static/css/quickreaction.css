@@ -1,0 +1,195 @@
+/*
+=============================================================================
+   THN Quick Reaction
+
+ ==========================================================================
+*/
+
+.thn-reaction {
+overflow:hidden;
+margin:10px 0;
+max-width:600px;
+padding:0;
+border:0;
+outline:0;
+vertical-align:baseline;
+background:transparent;
+line-height:1;
+font:13px/1.385 helvetica, arial, clean, sans-serif;
+color:#333;
+}
+.thn-reaction a {
+color:#225DB7;
+text-decoration:none;
+}
+.thn-reaction a:hover {
+text-decoration:underline;
+}
+.thn-reaction a:visited {
+color:#608FD6;
+}
+.thn-reaction p {
+font-size:13px;
+line-height: 1.385;
+font-family: helvetica, arial, clean, sans-serif;
+margin:0 0 1em 0;
+}
+.thn-reaction p:last-child {
+margin:0;
+}
+.thn-reaction > div {
+margin-bottom:20px;
+border:1px #c2c2c2 solid;
+overflow:hidden;
+background:#fff;
+}
+.thn-reaction img {
+background: none !important;
+border:none !important;
+}
+
+.thn-reaction table {
+border-collapse:collapse !important;
+border-spacing:0 !Important;
+margin:0 !important;
+padding:0 !important;
+border:0 !important;
+background: none !important;
+width: 100% !important;
+}
+.thn-reaction td {
+border:none;
+}
+
+/*
+=============================================================================
+   THN Header Section
+
+ ==========================================================================
+*/
+
+.thn-reaction-header {
+background:#fff url(http://a2.espncdn.com/prod/assets/gradient_back.jpg)
+bottom repeat-x !important;
+padding:10px;
+}
+.thn-reaction-header table {
+width:100%;
+clear:both;
+border:none !important;
+}
+.thn-reaction-header td {
+vertical-align: middle !important;
+margin:0 !important;
+padding:0 7px !important;
+border:none !important;
+text-align: center !important;
+}
+.thn-reaction-header table img {
+border:none;
+background-color:transparent;
+}
+.thn-reaction-score {
+font-size:20px;
+font-weight:bold;
+}
+.thn-reaction-final {
+font-size:12px;
+}
+
+/*
+=============================================================================
+   THN Grades Section
+
+ ==========================================================================
+*/
+
+.thn-reaction-grades {
+background:#fff;
+font-size:12px;
+padding:5px;
+}
+.thn-reaction-grades td {
+vertical-align: top !important;
+border:none !important;
+border-bottom:1px #d6d6d6 solid !important;
+margin:0 !important;
+padding:7px 7px 3px 7px !important;
+}
+.thn-reaction-grades td.last {
+border-bottom:none !important;
+}
+.thn-reaction-player {
+font-size:15px;
+font-weight:bold;
+margin:0;
+padding:0;
+}
+.thn-reaction-player-line {
+padding-left:10px;
+font-weight:bold;
+margin:0;
+padding:0;
+}
+.thn-reaction h4 {
+display: block;
+margin:0 0 1em 0;
+font-weight: bold;
+font-size: 15px;
+border-bottom:1px #d6d6d6 solid;
+padding:0 0 4px 0;
+text-transform:uppercase;
+}
+
+/*
+=============================================================================
+  THN Five Things We Saw
+
+ ==========================================================================
+*/
+
+.thn-reaction-summary {
+padding:10px;
+}
+.thn-reaction ol {
+counter-reset:li; /* Initiate a counter */
+margin-left:0; /* Remove the default left margin */
+padding-left:0; /* Remove the default left padding */
+}
+.thn-reaction ol > li {
+position:relative; /* Create a positioning context */
+margin:0 0 15px 2em; /* Give each list item a left margin to make room for
+the numbers */
+padding:0px 8px; /* Add some spacing around the content */
+list-style:none; /* Disable the normal item numbering */
+}
+.thn-reaction ol > li:before {
+content:counter(li); /* Use the counter as content */
+counter-increment:li; /* Increment the counter by 1 */
+/* Position and style the number */
+    position:absolute;
+top:2px;
+left:-2em;
+-moz-box-sizing:border-box;
+-webkit-box-sizing:border-box;
+box-sizing:border-box;
+width:2em;
+/* Some space between the number and the content in browsers that support
+       generated content but not positioning it (Camino 2 is one example) */
+    margin-right:8px;
+padding:4px;
+border-top:1px solid #d6d6d6;
+color:#fff;
+background:#666;
+font-weight:bold;
+font-family:"Helvetica Neue", Arial, sans-serif;
+text-align:center;
+}
+.thn-reaction li ol, .thn-reaction li ul {
+margin-top:6px;
+}
+.thn-reaction ol ol li:last-child {
+margin-bottom:0;
+}
+
+

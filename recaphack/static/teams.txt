@@ -1,0 +1,30 @@
+phi,Philadelphia,76ers
+cha,Charlotte,Bobcats
+mil,Milwaukee,Bucks
+chi,Chicago,Bulls
+cle,Cleveland,Cavaliers
+bos,Boston,Celtics
+lac,LA,Clippers
+mem,Memphis,Grizzlies
+atl,Atlanta,Hawks
+mia,Miami,Heat
+no,New Orleans,Hornets
+utah,Utah,Jazz
+sac,Sacramento,Kings
+ny,New York,Knicks
+lal,LA,Lakers
+orl,Orlando,Magic
+dal,Dallas,Mavericks
+nj,New Jersey,Nets
+den,Denver,Nuggets
+ind,Indiana,Pacers
+det,Detroit,Pistons
+tor,Toronto,Raptors
+hou,Houston,Rockets
+okc,OKC,Thunder
+min,Minnesota,Timberwolves
+por,Portland,Trail Blazers
+sa,San Antonio,Spurs
+phx,Phoenix,Suns
+gsw,Golden State,Warriors
+was,Washington,Wizards

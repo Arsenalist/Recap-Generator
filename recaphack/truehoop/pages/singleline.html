@@ -1,0 +1,35 @@
+
+         <div class="clearfix">
+            <label for="textarea">{{ p.Name }}
+            <img src="http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/{{ p.id }}.png&w=45&h=60&scale=crop&background=0xcccccc&transparent=false"/>
+            
+            </label>
+            <div class="input">
+              <textarea class="xxlarge" name="player_blurb_{{ p.id  }}" rows="5"></textarea>
+              <select class="small" name="player_rating_{{ p.id  }}">
+                  <option value="aplus">A+</option>
+                  <option value="a">A</option>
+                  <option value="aminus">A-</option>
+                  <option value="bplus">B+</option>
+                  <option value="b">B</option>
+                  <option value="bminus">B-</option>
+                  <option value="cplus">C+</option>
+                  <option value="c">C</option>
+                  <option value="cminus">C-</option>
+                  <option value="dplus">D+</option>
+                  <option value="d">D</option>
+                  <option value="dminus">D-</option>
+                  <option value="f">F</option>
+
+              </select>
+              <span class="help-block">
+                   {% if p|length = 2  %}
+                       {{ p.min}}
+                   {% else %}
+                       {{ p.min}} min, {{ p.pts}} pts, {{ p.reb}} reb, {{ p.ast }} ast, {{ p.stl }} stl, {{ p.blk }} blk, {{ p.FG }} FG, {{ p.3FG }} 3FG, {{ p.FT}} FT
+                   {% endif %}
+
+              </span>
+            </div>
+          </div>
+
