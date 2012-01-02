@@ -78,9 +78,13 @@ def markup(request):
     for t in request.POST.getlist('things'):
         if t != '':
 	    things.append(t) 
+    num_names = ['One Thing', 'Two Things', 'Three Things', 'Four Things', 'Five Things']
+    str_things_count = None
+    if things:
+        str_things_count = num_names[len(things)-1]
     # create html
     template = loader.get_template('reaction.html')
-    html = template.render(Context({"starters": starters, "bench": bench, 'game_id': game_id, 'abbrs': abbrs, 'names': names, 'score': score, 'things': things}))
+    html = template.render(Context({"starters": starters, "bench": bench, 'game_id': game_id, 'abbrs': abbrs, 'names': names, 'score': score, 'things': things, 'str_things_count': str_things_count}))
     
     # create css
     f = urllib2.urlopen('http://saltcityhoops.com/thn-recaps/thn-styles.css')

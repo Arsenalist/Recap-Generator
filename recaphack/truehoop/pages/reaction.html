@@ -23,7 +23,7 @@
  </div>
  {% if things|length != 0 %}
  <div class="thn-reaction-summary">
- <h4>Five Things We Saw</h4>
+ <h4>{{ str_things_count }} We Saw</h4>
 <ol>
      {% for t in things %}
         {% if t %}
