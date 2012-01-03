@@ -5,9 +5,9 @@ from xml.dom.minidom import parse, parseString
 
 def get_latest_game_id(abbr):
     # get last game id by scanning schedule page
-    f = urllib2.urlopen('http://espn.go.com/nba/team/schedule/_/name/' + abbr)
+    f = urllib2.urlopen('http://espn.go.com/nba/team/_/name/' + abbr)
     contents  = f.read().replace('\n', '')
-    matches  = re.findall(r'/nba/recap\?id=(\d+)', contents)
+    matches  = re.findall(r'/nba/boxscore\?id=(\d+)', contents)
     return int(matches[-1])
 
 def get_page_html(id):
