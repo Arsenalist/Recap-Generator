@@ -19,6 +19,7 @@ def get_boxscore_dom(page_html):
     table = r[-1]
     table = re.sub(r'(<tr\s(.*?)>)','<tr>', table)
     table = re.sub(r'(<td\s(.*?)>)','<td>', table)
+    table = re.sub(r'(width=\d+%|nowrap|&nbsp;)','', table).replace('OREB</td>', 'OREB</th>')
     return parseString(table)
    
 
