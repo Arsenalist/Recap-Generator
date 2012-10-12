@@ -17,7 +17,8 @@ def get_page_html(id):
 def get_boxscore_dom(page_html):
     r = re.findall(r'<table border="0" width="100%" class="mod-data">.*</table>', page_html)
     table = r[-1]
-    table = re.sub(r'(width=\d+%|nowrap|&nbsp;)','', table).replace('OREB</td>', 'OREB</th>')
+    table = re.sub(r'(<tr\s(.*?)>)','<tr>', table)
+    table = re.sub(r'(<td\s(.*?)>)','<td>', table)
     return parseString(table)
    
 
