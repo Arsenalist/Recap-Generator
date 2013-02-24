@@ -1,0 +1,28 @@
+<input type="hidden" name="coach_name" value="{{ coach.0 }}"/>
+<input type="hidden" name="coach_image" value="{{ coach.1 }}"/>
+         <div class="clearfix">
+            <label for="textarea">{{ coach.0 }}
+            <img src="{{ coach.1 }}"/>
+            
+            </label>
+            <div class="input">
+              <textarea class="xxlarge" name="coach_blurb" rows="5"></textarea>
+              <select class="small" name="coach_rating">
+                  <option value="aplus">A+</option>
+                  <option value="a">A</option>
+                  <option value="aminus">A-</option>
+                  <option value="bplus">B+</option>
+                  <option value="b">B</option>
+                  <option value="bminus">B-</option>
+                  <option value="cplus">C+</option>
+                  <option value="c">C</option>
+                  <option value="cminus">C-</option>
+                  <option value="dplus">D+</option>
+                  <option value="d">D</option>
+                  <option value="dminus">D-</option>
+                  <option value="f">F</option>
+
+              </select>
+            </div>
+          </div>
+
