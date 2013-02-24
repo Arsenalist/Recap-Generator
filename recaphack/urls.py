@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^truehoop/lines$', 'recaphack.truehoop.views.lines', name='lines'),
     url(r'^truehoop/markup$', 'recaphack.truehoop.views.markup', name='markup'),
     url(r'^truehoop/preview$', 'recaphack.truehoop.views.preview', name='preview'),
+    url(r'^truehoop/t$', 'recaphack.truehoop.views.t', name='t'),
     # url(r'^recaphack/', include('recaphack.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

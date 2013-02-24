@@ -15,7 +15,7 @@ ny,New York,Knicks
 lal,LA,Lakers
 orl,Orlando,Magic
 dal,Dallas,Mavericks
-nj,New Jersey,Nets
+bkn,Brooklyn,Nets
 den,Denver,Nuggets
 ind,Indiana,Pacers
 det,Detroit,Pistons

@@ -3,7 +3,6 @@ from django.template import RequestContext
 from django.shortcuts import *
 from django.utils import simplejson
 import csv
-from models import Team
 from models import Recap
 import urllib2
 import re
@@ -11,9 +10,7 @@ import boxscore
 from django.template import Context,Template
 from django.template import loader
 import os.path
-import base64
 import urllib
-from HTMLParser import HTMLParser
 
 
 def unescape_html(s):
@@ -40,20 +37,24 @@ def home(request):
 
 def lines(request):
     abbr = request.POST['abbr']
-    name = request.POST['name']
+    name = request.POST['name']    
+    coach_info = boxscore.get_coach_info(abbr)
     box = boxscore.get_boxscore(abbr, name)
     template = loader.get_template('linesform.html')
-    html = template.render(Context({"starters": box[0], "bench": box[1]}))
+    html = template.render(Context({"starters": box[0], "bench": box[1], "coach": coach_info}))
     return HttpResponse(simplejson.dumps({'html': html}), mimetype='application/javascript')
  
- 
+def t(request):
+    return HttpResponse("hi")
  
 def decorate_lines(request, lines):
     temp = []
     for l in lines:
-        blurb = request.POST['player_blurb_' + str(l['id'])]
-        if blurb != '':
-            temp.append(l)
+        key = 'player_blurb_' + str(l['id'])
+	if key in request.POST.keys():
+	    blurb = request.POST[key]
+	    if blurb != '':
+                temp.append(l)
 
     for l in temp:
         l['blurb'] = request.POST['player_blurb_' + str(l['id'])]
@@ -74,6 +75,13 @@ def markup(request):
     score = box[5]
     starters = decorate_lines(request, starters)
     bench = decorate_lines(request, bench)
+    coach = {'name': request.POST['coach_name'], 'image': request.POST['coach_image'], 'blurb': request.POST['coach_blurb'], 'rating': request.POST['coach_rating']}
+    # utah workaoround
+    if abbrs[0] == 'utah':
+        abbrs[0] = 'uta'
+
+    if abbrs[1] == 'utah':
+        abbrs[1] = 'uta'
 
     # list of things
     things = []
@@ -86,10 +94,12 @@ def markup(request):
         str_things_count = num_names[len(things)-1]
     # create html
     template = loader.get_template('reaction.html')
-    html = template.render(Context({"starters": starters, "bench": bench, 'game_id': game_id, 'abbrs': abbrs, 'names': names, 'score': score, 'things': things, 'str_things_count': str_things_count}))
+    html = template.render(Context({"starters": starters, "bench": bench, 'game_id': game_id, 'abbrs': abbrs, 'names': names, 'score': score, 'things': things, 'str_things_count': str_things_count, 'coach': coach}))
     
     # create css
-    f = urllib2.urlopen('http://saltcityhoops.com/thn-recaps/thn-styles.css')
+
+    location = "/www/Recap-Generator/recaphack/static/styles.css"
+    f = open(location, "r")
     css = f.read()
 
     r = Recap(html=html, css=css, home_abbr=abbrs[1], away_abbr=abbrs[0], home_name=names[1], away_name=names[0], home_score=score[1], away_score=score[0])

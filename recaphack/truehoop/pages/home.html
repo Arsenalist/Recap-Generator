@@ -147,16 +147,19 @@ Pick a team, wait till it gets the <strong>box score information from the latest
 $(document).ready(function() {
 
     $('#team').change(function() {
+        $('#team').attr('disabled', '');
         var sel = $('#team option:selected'); 
         if (sel.val() == '') return;
         $.post('/truehoop/lines', {abbr: sel.val(), name: sel.text()}, function(data){
             $('#mainarea').html(data.html)
             $('#actions').show();
+            $('#team').removeAttr('disabled');
         }, 'json');
         return false;
     });
 
      $('#submit').click(function() {
+        $('#submit').attr('disabled', '');
         var sel = $('#team option:selected'); 
         if (sel.val() == '') return;
         data = $('#recap_form').serialize() + "&abbr=" + sel.val() + "&name=" + sel.text();
@@ -164,6 +167,7 @@ $(document).ready(function() {
             $('#markup').html(data.html);
             $('#markup').modal({keyboard: true});
             $('#markup').modal('show');
+            $('#submit').removeAttr('disabled');
         }, 'json');
         return false;
     });

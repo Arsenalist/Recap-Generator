@@ -1,7 +1,28 @@
 import urllib2
 import re
 from xml.dom.minidom import parse, parseString
+from pyquery import PyQuery as pq
+from lxml import etree
 
+
+def get_coach_info(abbr):    
+    f = urllib2.urlopen('http://espn.go.com/nba/team/roster/_/name/' + abbr)
+    contents  = f.read()
+    d = pq(contents)
+    # get name and url of coach page    
+    name = d('.total td a').text()
+    url = d('.total td a').attr('href')
+
+    # from url of coach name, get coach image
+    f = urllib2.urlopen(url)
+    contents  = f.read()
+    d = pq(contents)
+    image = d('table.tablehead tr:nth-child(2) td img').attr('src')
+    return (name, image)
+ 
+
+
+    
 
 def get_latest_game_id(abbr):
     # get last game id by scanning schedule page
@@ -20,6 +41,8 @@ def get_boxscore_dom(page_html):
     table = re.sub(r'(<tr\s(.*?)>)','<tr>', table)
     table = re.sub(r'(<td\s(.*?)>)','<td>', table)
     table = re.sub(r'(width=\d+%|nowrap|&nbsp;)','', table).replace('OREB</td>', 'OREB</th>')
+    table = '<?xml version="1.0" encoding="Latin-1"?>' + table
+    print table
     return parseString(table)
    
 
