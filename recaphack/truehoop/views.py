@@ -44,9 +44,6 @@ def lines(request):
     html = template.render(Context({"starters": box[0], "bench": box[1], "coach": coach_info}))
     return HttpResponse(simplejson.dumps({'html': html}), mimetype='application/javascript')
  
-def t(request):
-    return HttpResponse("hi")
- 
 def decorate_lines(request, lines):
     temp = []
     for l in lines:
@@ -59,8 +56,11 @@ def decorate_lines(request, lines):
     for l in temp:
         l['blurb'] = request.POST['player_blurb_' + str(l['id'])]
         l['rating'] = request.POST['player_rating_' + str(l['id'])]
-        l['image'] = "http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/" + str(l['id']) + ".png&w=65&h=90&scale=crop&background=0xffffff&transparent=false"
-    
+        if l['rating'] == 'inc':
+            l['rating'] = 'http://i3.minus.com/ibyI6HKMAr5o6L.jpg'
+        else:
+            l['rating'] = 'http://espn.go.com/i/nfl/grades/grade_' + l['rating'] + '.jpg'
+            l['image'] = boxscore.get_player_image(l['id']) 
     return temp
 
 def markup(request):
@@ -77,11 +77,11 @@ def markup(request):
     bench = decorate_lines(request, bench)
     coach = {'name': request.POST['coach_name'], 'image': request.POST['coach_image'], 'blurb': request.POST['coach_blurb'], 'rating': request.POST['coach_rating']}
     # utah workaoround
-    if abbrs[0] == 'utah':
-        abbrs[0] = 'uta'
+    #if abbrs[0] == 'utah':
+    #    abbrs[0] = 'uta'
 
-    if abbrs[1] == 'utah':
-        abbrs[1] = 'uta'
+    #if abbrs[1] == 'utah':
+    #    abbrs[1] = 'uta'
 
     # list of things
     things = []

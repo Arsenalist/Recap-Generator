@@ -1,12 +1,13 @@
 
          <div class="clearfix">
             <label for="textarea">{{ p.Name }}
-            <img src="http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/{{ p.id }}.png&w=45&h=60&scale=crop&background=0xcccccc&transparent=false"/>
+            <img style="width:45px; height: 60px;" src="{{p.image}}"/>
             
             </label>
             <div class="input">
               <textarea class="xxlarge" name="player_blurb_{{ p.id  }}" rows="5"></textarea>
               <select class="small" name="player_rating_{{ p.id  }}">
+                  <option value="inc">Incomplete</option>
                   <option value="aplus">A+</option>
                   <option value="a">A</option>
                   <option value="aminus">A-</option>
