@@ -3,6 +3,18 @@ import re
 from xml.dom.minidom import parse, parseString
 from pyquery import PyQuery as pq
 from lxml import etree
+import views
+
+
+def get_player_image(id):
+    if id  == 6503:
+        return 'http://www.raptorsrepublic.com/wp-content/uploads/2013/10/dwightbuycksheadshot.jpg'
+    elif id == 3070169:
+        return 'http://www.raptorsrepublic.com/wp-content/uploads/2013/10/carlosmoraisheadshot.jpg'
+    else:
+        return "http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/" + str(id) + ".png&w=65&h=90&scale=crop&background=0xffffff&transparent=false"
+
+
 
 
 def get_coach_info(abbr):    
@@ -36,7 +48,8 @@ def get_page_html(id):
     return f.read().replace('\n', '')
  
 def get_boxscore_dom(page_html):
-    r = re.findall(r'<table border="0" width="100%" class="mod-data">.*</table>', page_html)
+    #r = re.findall(r'<table border="0" width="100%" class="mod-data">.*</table>', page_html)
+    r = re.findall(r'<table border="0" width="100%" class="mod-data">.*?</table>', page_html)
     table = r[-1]
     table = re.sub(r'(<tr\s(.*?)>)','<tr>', table)
     table = re.sub(r'(<td\s(.*?)>)','<td>', table)
@@ -86,6 +99,7 @@ def get_group_lines(dom, tbody_index):
                          profile_url = n.attributes.getNamedItem('href').nodeValue
                          matches  = re.findall(r'/id/(\d+)/', profile_url)
                          line['id'] = int(matches[-1])
+                         line['image'] = get_player_image(line['id'])
                  td_index = td_index + 1
              lines.append(line)
         i = i + 1
