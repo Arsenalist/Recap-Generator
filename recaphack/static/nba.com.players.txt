@@ -1,0 +1,28 @@
+Quincy Acy=203112
+
+Steven Adams=203500
+
+Jeff Adrien=202399
+
+Arron Afflalo=201167
+
+Cole Aldrich=202332
+
+LaMarcus Aldridge=200746
+
+Lavoy Allen=202730
+
+Ray Allen=951
+
+Tony Allen=2754
+
+Al-Farouq Aminu=202329
+
+Lou Amundson=200811
+
+Chris Andersen=2365
+
+Alan Anderson=101187
+
+James Anderson=202341
+
