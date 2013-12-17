@@ -1,11 +1,9 @@
-
-
 <div class="modal-header" ><a href="#" class="close" >x</a > <h3>Output</h3 ></div > <div class="modal-body">
 <h3>HTML</h3>
 
          <div class="clearfix">
             <div class="input">
-              <textarea name="html" class="selectable xxlarge" rows="1">{{ html }}</textarea>
+              <textarea name="html" class="selectable xxlarge" rows="1">{{ html|safe }}</textarea>
               <span class="help-block">
                 Just copy and poste this in your post.
               </span>

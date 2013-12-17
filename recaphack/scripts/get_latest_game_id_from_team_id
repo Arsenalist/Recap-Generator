@@ -1,0 +1,14 @@
+#!/usr/bin/phantomjs
+
+var system = require('system');
+
+var page = require('webpage').create();
+page.open('http://stats.nba.com/teamGameLogs.html?TeamID=' + system.args[1]  + '&pageNo=1&rowsPerPage=25', function(status) {
+        var firstGameId = page.evaluate(function() {
+            return $('#teamGameLogGridContainer tr:nth-child(2) td.col-Game_ID_SORT a').attr('href').split('=')[1];
+        });
+        console.log(firstGameId);
+
+        phantom.exit();
+});
+

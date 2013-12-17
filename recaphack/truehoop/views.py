@@ -63,6 +63,28 @@ def decorate_lines(request, lines):
             l['image'] = boxscore.get_player_image(l['id']) 
     return temp
 
+def add_nba_data(starters, abbr):
+    import ConfigParser
+    team_config = ConfigParser.ConfigParser()
+    team_config.read('/www/Recap-Generator/recaphack/static/nba.com.teams.txt')
+    nba_team_id = team_config.get('Teams', abbr)
+    nba_game_id = get_latest_nba_com_game_id(nba_team_id)
+
+    player_config = ConfigParser.ConfigParser()
+    player_config.read('/www/Recap-Generator/recaphack/static/nba.com.players.txt')
+    for s in starters:
+        name_without_position = s['Name'].split(',')[0]    
+        nba_player_id = player_config.get('ActivePlayers', name_without_position)
+        shot_chart_link = '<a class="shot-chart" href="http://stats.nba.com/shotchartPopup.html?Season=2013-14&TeamID=' + str(nba_team_id) + '&PlayerID=' + str(nba_player_id) + '&GameID=' + str(nba_game_id)  + '&ContextMeasure=FG_PCT">Shot Chart</a>'
+        s['Name'] = s['Name'] + " " + shot_chart_link
+    return starters
+
+def get_latest_nba_com_game_id(nba_team_id):
+    from subprocess import check_output
+    latest_game_id = check_output(["get_latest_game_id_from_team_id", nba_team_id]).strip()
+    return latest_game_id
+
+
 def markup(request):
     abbr = request.POST['abbr']
     name = request.POST['name']
@@ -75,6 +97,9 @@ def markup(request):
     score = box[5]
     starters = decorate_lines(request, starters)
     bench = decorate_lines(request, bench)
+    if 'show_nba_data' in request.POST:
+        starters = add_nba_data(starters, abbr)
+        bench = add_nba_data(bench, abbr)
     coach = {'name': request.POST['coach_name'], 'image': request.POST['coach_image'], 'blurb': request.POST['coach_blurb'], 'rating': request.POST['coach_rating']}
     # utah workaoround
     #if abbrs[0] == 'utah':
