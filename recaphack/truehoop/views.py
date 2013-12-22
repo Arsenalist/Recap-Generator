@@ -75,6 +75,8 @@ def add_nba_data(starters, abbr):
     for s in starters:
         name_without_position = s['Name'].split(',')[0]    
         nba_player_id = player_config.get('ActivePlayers', name_without_position)
+        if nba_player_id is None:
+            continue
         shot_chart_link = '<a class="shot-chart" href="http://stats.nba.com/shotchartPopup.html?Season=2013-14&TeamID=' + str(nba_team_id) + '&PlayerID=' + str(nba_player_id) + '&GameID=' + str(nba_game_id)  + '&ContextMeasure=FG_PCT">Shot Chart</a>'
         s['Name'] = s['Name'] + " " + shot_chart_link
     return starters
