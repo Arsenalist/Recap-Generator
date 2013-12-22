@@ -1,3 +1,7 @@
+{% if team_id == 'tor' and allow_user_voting %}
+	<script src="http://playerrater.raptorsrepublic.com/client.js"></script>	
+	<iframe height="0" width="0" tab-index="-1" style="display:none" hidden data-game-id="{{game_id}}" data-team-id="{{team_id}}" id="grader-iframe" src="http://playerrater.raptorsrepublic.com/mediator.html"></iframe>
+{% endif %}
 <div class="thn-reaction"><div class="thn-reaction-header"><table class="thn-reaction-table"><tr>
 <td><img src="http://a.espncdn.com/combiner/i?img=/i/teamlogos/nba/500-dark/{{ abbrs.0 }}.png?w=50&h=50&transparent=true"></td>
 <td>{{ names.0  }}</td>

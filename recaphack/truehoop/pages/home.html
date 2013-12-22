@@ -134,8 +134,13 @@ Pick a team, wait till it gets the <strong>box score information from the latest
 <div id="mainarea"></div>
 
         <div class="actions" style="display:none" id="actions">
+<p>
+          <input id="show_nba_data" name="show_nba_data" type="checkbox" checked /> Display NBA.com Shot Chart Links (Beta)<br/>
+          <input id="allow_user_voting" name="allow_user_voting" type="checkbox" checked /> Allow Readers to Grade Players (Available for Raptors only)
+</p>
+<p>
           <input id="submit" type="button" class="btn primary" value="Generate Recap"/>
-          <input id="show_nba_data" name="show_nba_data" type="checkbox" checked /> Display NBA.com Shot Chart Links
+</p>
         </div>
 
 
@@ -151,11 +156,21 @@ $(document).ready(function() {
         $('#team').attr('disabled', '');
         var sel = $('#team option:selected'); 
         if (sel.val() == '') return;
-        $.post('/truehoop/lines', {abbr: sel.val(), name: sel.text()}, function(data){
+        $.ajax({
+		url: '/truehoop/lines', 
+		data: {abbr: sel.val(), name: sel.text()},
+		type: 'POST',
+		dataType: 'json'})
+	.done(function(data){
             $('#mainarea').html(data.html)
             $('#actions').show();
+        })
+	.fail(function(xhr, textStatus) {
+		alert("Something didn't work - " + textStatus);
+	})
+	.always(function(){
             $('#team').removeAttr('disabled');
-        }, 'json');
+	});
         return false;
     });
 
@@ -164,12 +179,23 @@ $(document).ready(function() {
         var sel = $('#team option:selected'); 
         if (sel.val() == '') return;
         data = $('#recap_form').serialize() + "&abbr=" + sel.val() + "&name=" + sel.text();
-        $.post('/truehoop/markup', data, function(data){
+        $.ajax({
+		url: '/truehoop/markup', 
+		data: data, 
+		type: 'POST',
+		dataType: 'json'
+	       })
+	.done(function(data){
             $('#markup').html(data.html);
             $('#markup').modal({keyboard: true});
             $('#markup').modal('show');
+        })
+	.fail(function(xhr, textStatus) {
+		alert("Something didn't work - " + textStatus);
+	})
+	.always(function(){
             $('#submit').removeAttr('disabled');
-        }, 'json');
+	});
         return false;
     });
 

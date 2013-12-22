@@ -101,6 +101,8 @@ def markup(request):
         starters = add_nba_data(starters, abbr)
         bench = add_nba_data(bench, abbr)
     coach = {'name': request.POST['coach_name'], 'image': request.POST['coach_image'], 'blurb': request.POST['coach_blurb'], 'rating': request.POST['coach_rating']}
+
+    allow_user_voting = 'allow_user_voting' in request.POST
     # utah workaoround
     #if abbrs[0] == 'utah':
     #    abbrs[0] = 'uta'
@@ -119,7 +121,7 @@ def markup(request):
         str_things_count = num_names[len(things)-1]
     # create html
     template = loader.get_template('reaction.html')
-    html = template.render(Context({"starters": starters, "bench": bench, 'game_id': game_id, 'abbrs': abbrs, 'names': names, 'score': score, 'things': things, 'str_things_count': str_things_count, 'coach': coach}))
+    html = template.render(Context({"allow_user_voting": allow_user_voting, "team_id": abbr, "starters": starters, "bench": bench, 'game_id': game_id, 'abbrs': abbrs, 'names': names, 'score': score, 'things': things, 'str_things_count': str_things_count, 'coach': coach}))
     
     # create css
 
